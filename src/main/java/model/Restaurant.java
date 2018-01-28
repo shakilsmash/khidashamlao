@@ -11,26 +11,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "restaurant")
+public class Restaurant {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")
     private long id;
 
-    @Column(name = "firstName")
-    private String firstName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "dateOfBirth")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String dateOfBirth;
-
-    @Column(name = "username")
-    private String username;
+    @Column(name = "vat")
+    private double vat;
 
     @Column(name = "email")
     private String email;
@@ -50,8 +46,23 @@ public class User {
     @Column(name = "zipCode")
     private String zipCode;
 
-    @Column(name = "role")
-    private String role;
+    @Column(name = "openingTime")
+    private String openingTime;
+
+    @Column(name = "closingTime")
+    private String closingTime;
+
+    @Column(name = "cuisineSpecialty")
+    private String cuisineSpecialty;
+
+    @Column(name = "environmentType")
+    private String environmentType;
+
+    @Column(name = "environmentType")
+    private boolean advancedBooking;
+
+    @Column(name = "delivery")
+    private boolean delivery;
 
     @Column(name = "status")
     private String status;
@@ -68,7 +79,6 @@ public class User {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String deletedAt;
 
-
     public long getId() {
         return id;
     }
@@ -77,36 +87,28 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public double getVat() {
+        return vat;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setVat(double vat) {
+        this.vat = vat;
     }
 
     public String getEmail() {
@@ -157,12 +159,52 @@ public class User {
         this.zipCode = zipCode;
     }
 
-    public String getRole() {
-        return role;
+    public String getOpeningTime() {
+        return openingTime;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setOpeningTime(String openingTime) {
+        this.openingTime = openingTime;
+    }
+
+    public String getClosingTime() {
+        return closingTime;
+    }
+
+    public void setClosingTime(String closingTime) {
+        this.closingTime = closingTime;
+    }
+
+    public String getCuisineSpecialty() {
+        return cuisineSpecialty;
+    }
+
+    public void setCuisineSpecialty(String cuisineSpecialty) {
+        this.cuisineSpecialty = cuisineSpecialty;
+    }
+
+    public String getEnvironmentType() {
+        return environmentType;
+    }
+
+    public void setEnvironmentType(String environmentType) {
+        this.environmentType = environmentType;
+    }
+
+    public boolean isAdvancedBooking() {
+        return advancedBooking;
+    }
+
+    public void setAdvancedBooking(boolean advancedBooking) {
+        this.advancedBooking = advancedBooking;
+    }
+
+    public boolean isDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(boolean delivery) {
+        this.delivery = delivery;
     }
 
     public String getStatus() {
@@ -199,19 +241,23 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Restaurant{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", vat=" + vat +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipCode='" + zipCode + '\'' +
-                ", role='" + role + '\'' +
+                ", openingTime='" + openingTime + '\'' +
+                ", closingTime='" + closingTime + '\'' +
+                ", cuisineSpecialty='" + cuisineSpecialty + '\'' +
+                ", environmentType='" + environmentType + '\'' +
+                ", advancedBooking=" + advancedBooking +
+                ", delivery=" + delivery +
                 ", status='" + status + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", lastModifiedAt='" + lastModifiedAt + '\'' +
