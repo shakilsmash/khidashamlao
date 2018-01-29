@@ -1,37 +1,57 @@
 package model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "restaurant")
 public class Restaurant {
 
+    public enum Cuisine { BENGALI, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
+    public enum Environment { LOUNGE, FAMILY, PARTY, KARAOKE, STALL}
+
     @Id
+    @NotNull
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")
+    @Column(name = "id", unique = true)
     private long id;
 
-    @Column(name = "name")
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "name", unique = true)
     private String name;
 
+    @NotBlank
+    @Length(max = 1000)
     @Column(name = "description")
     private String description;
 
+    @NotBlank
     @Column(name = "vat")
     private double vat;
 
-    @Column(name = "email")
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "mobile")
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "mobile", unique = true)
     private String mobile;
 
     @Column(name = "street")
@@ -46,222 +66,48 @@ public class Restaurant {
     @Column(name = "zipCode")
     private String zipCode;
 
+    @NotBlank
+    @Length(max = 255)
     @Column(name = "openingTime")
     private String openingTime;
 
+    @NotBlank
+    @Length(max = 255)
     @Column(name = "closingTime")
     private String closingTime;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "cuisineSpecialty")
-    private String cuisineSpecialty;
+    private Cuisine cuisineSpecialty;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "environmentType")
-    private String environmentType;
+    private Environment environmentType;
 
-    @Column(name = "environmentType")
+    @Column(name = "advancedBooking")
     private boolean advancedBooking;
 
     @Column(name = "delivery")
     private boolean delivery;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
+    @NotNull
     @Column(name = "createdAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String createdAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp createdAt;
 
+    @NotNull
     @Column(name = "lastModifiedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String lastModifiedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp lastModifiedAt;
 
+    @NotNull
     @Column(name = "deletedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String deletedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp deletedAt;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public double getVat() {
-        return vat;
-    }
-
-    public void setVat(double vat) {
-        this.vat = vat;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getOpeningTime() {
-        return openingTime;
-    }
-
-    public void setOpeningTime(String openingTime) {
-        this.openingTime = openingTime;
-    }
-
-    public String getClosingTime() {
-        return closingTime;
-    }
-
-    public void setClosingTime(String closingTime) {
-        this.closingTime = closingTime;
-    }
-
-    public String getCuisineSpecialty() {
-        return cuisineSpecialty;
-    }
-
-    public void setCuisineSpecialty(String cuisineSpecialty) {
-        this.cuisineSpecialty = cuisineSpecialty;
-    }
-
-    public String getEnvironmentType() {
-        return environmentType;
-    }
-
-    public void setEnvironmentType(String environmentType) {
-        this.environmentType = environmentType;
-    }
-
-    public boolean isAdvancedBooking() {
-        return advancedBooking;
-    }
-
-    public void setAdvancedBooking(boolean advancedBooking) {
-        this.advancedBooking = advancedBooking;
-    }
-
-    public boolean isDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(boolean delivery) {
-        this.delivery = delivery;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getLastModifiedAt() {
-        return lastModifiedAt;
-    }
-
-    public void setLastModifiedAt(String lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
-    }
-
-    public String getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(String deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", vat=" + vat +
-                ", email='" + email + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", openingTime='" + openingTime + '\'' +
-                ", closingTime='" + closingTime + '\'' +
-                ", cuisineSpecialty='" + cuisineSpecialty + '\'' +
-                ", environmentType='" + environmentType + '\'' +
-                ", advancedBooking=" + advancedBooking +
-                ", delivery=" + delivery +
-                ", status='" + status + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", lastModifiedAt='" + lastModifiedAt + '\'' +
-                ", deletedAt='" + deletedAt + '\'' +
-                '}';
-    }
 }

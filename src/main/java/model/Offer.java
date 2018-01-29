@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "offer")
 public class Offer {
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")

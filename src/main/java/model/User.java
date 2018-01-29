@@ -1,41 +1,73 @@
 package model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "user")
 public class User {
 
+    public enum Sex {MALE, FEMALE, OTHER}
+    public enum Role { USER, RESTAURANTADMIN, ADMIN }
+
     @Id
+    @NotNull
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")
+    @Column(name = "id", unique = true)
     private long id;
 
+    @NotBlank
+    @Length(max = 255)
     @Column(name = "firstName")
     private String firstName;
 
+    @NotBlank
+    @Length(max = 255)
     @Column(name = "lastName")
     private String lastName;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sex")
+    private Sex sex;
+
     @Column(name = "dateOfBirth")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
-    @Column(name = "username")
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "email")
+    @NotEmpty
+    @Length(max = 255)
+    @Column(name = "password")
+    private String password;
+
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "mobile")
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "mobile", unique = true)
     private String mobile;
 
     @Column(name = "street")
@@ -50,24 +82,37 @@ public class User {
     @Column(name = "zipCode")
     private String zipCode;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Role role;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
+    @NotNull
     @Column(name = "createdAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String createdAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp createdAt;
 
+    @NotNull
     @Column(name = "lastModifiedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String lastModifiedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp lastModifiedAt;
 
+    @NotNull
     @Column(name = "deletedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String deletedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp deletedAt;
 
+
+    public User() {
+        this.role = Role.USER;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
 
     public long getId() {
         return id;
@@ -93,11 +138,19 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -107,6 +160,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -157,43 +218,43 @@ public class User {
         this.zipCode = zipCode;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getLastModifiedAt() {
+    public Timestamp getLastModifiedAt() {
         return lastModifiedAt;
     }
 
-    public void setLastModifiedAt(String lastModifiedAt) {
+    public void setLastModifiedAt(Timestamp lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 
-    public String getDeletedAt() {
+    public Timestamp getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(String deletedAt) {
+    public void setDeletedAt(Timestamp deletedAt) {
         this.deletedAt = deletedAt;
     }
 
@@ -203,19 +264,21 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", sex=" + sex +
+                ", dateOfBirth=" + dateOfBirth +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipCode='" + zipCode + '\'' +
-                ", role='" + role + '\'' +
-                ", status='" + status + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", lastModifiedAt='" + lastModifiedAt + '\'' +
-                ", deletedAt='" + deletedAt + '\'' +
+                ", role=" + role +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", lastModifiedAt=" + lastModifiedAt +
+                ", deletedAt=" + deletedAt +
                 '}';
     }
 }
