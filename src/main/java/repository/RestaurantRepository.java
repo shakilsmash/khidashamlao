@@ -1,7 +1,11 @@
 package repository;
 
-/**
- * Created by shakilsmash on 1/29/2018.
- */
-public class RestaurantRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import model.Restaurant;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
+
 }

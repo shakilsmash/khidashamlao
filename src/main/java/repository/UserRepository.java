@@ -1,7 +1,11 @@
 package repository;
 
-/**
- * Created by shakilsmash on 1/29/2018.
- */
-public class User {
+import org.springframework.data.repository.CrudRepository;
+
+import model.User;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
+
 }

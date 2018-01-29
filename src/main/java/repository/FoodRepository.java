@@ -1,7 +1,11 @@
 package repository;
 
-/**
- * Created by shakilsmash on 1/29/2018.
- */
-public class FoodRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import model.Food;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface FoodRepository extends CrudRepository<Food, Long> {
+
 }
