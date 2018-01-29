@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 @Table(name = "restaurant")
 public class Restaurant {
 
-    public enum Cuisine { BENGALI, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
+    public enum Cuisine { BENGALI, BAKERY, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
     public enum Environment { LOUNGE, FAMILY, PARTY, KARAOKE, STALL}
 
     @Id
@@ -69,12 +69,12 @@ public class Restaurant {
     @NotBlank
     @Length(max = 255)
     @Column(name = "openingTime")
-    private String openingTime;
+    private Timestamp openingTime;
 
     @NotBlank
     @Length(max = 255)
     @Column(name = "closingTime")
-    private String closingTime;
+    private Timestamp closingTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cuisineSpecialty")
@@ -109,5 +109,189 @@ public class Restaurant {
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getVat() {
+        return vat;
+    }
+
+    public void setVat(double vat) {
+        this.vat = vat;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Timestamp getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime(Timestamp openingTime) {
+        this.openingTime = openingTime;
+    }
+
+    public Timestamp getClosingTime() {
+        return closingTime;
+    }
+
+    public void setClosingTime(Timestamp closingTime) {
+        this.closingTime = closingTime;
+    }
+
+    public Cuisine getCuisineSpecialty() {
+        return cuisineSpecialty;
+    }
+
+    public void setCuisineSpecialty(Cuisine cuisineSpecialty) {
+        this.cuisineSpecialty = cuisineSpecialty;
+    }
+
+    public Environment getEnvironmentType() {
+        return environmentType;
+    }
+
+    public void setEnvironmentType(Environment environmentType) {
+        this.environmentType = environmentType;
+    }
+
+    public boolean isAdvancedBooking() {
+        return advancedBooking;
+    }
+
+    public void setAdvancedBooking(boolean advancedBooking) {
+        this.advancedBooking = advancedBooking;
+    }
+
+    public boolean isDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(boolean delivery) {
+        this.delivery = delivery;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public void setLastModifiedAt(Timestamp lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
+    }
+
+    public Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", vat=" + vat +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", openingTime=" + openingTime +
+                ", closingTime=" + closingTime +
+                ", cuisineSpecialty=" + cuisineSpecialty +
+                ", environmentType=" + environmentType +
+                ", advancedBooking=" + advancedBooking +
+                ", delivery=" + delivery +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", lastModifiedAt=" + lastModifiedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
+    }
 }

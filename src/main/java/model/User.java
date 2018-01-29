@@ -22,7 +22,7 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
-    public enum Sex {MALE, FEMALE, OTHER}
+    public enum Sex { MALE, FEMALE, OTHER }
     public enum Role { USER, RESTAURANTADMIN, ADMIN }
 
     @Id

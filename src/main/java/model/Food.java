@@ -1,53 +1,74 @@
 package model;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "food")
 public class Food {
 
+    public enum FoodType { BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")
+    @Column(name = "id", unique = true)
     private long id;
 
+    @NotBlank
+    @Length(max = 255)
     @Column(name = "name")
     private String name;
 
+    @NotBlank
+    @Length(max = 1000)
     @Column(name = "description")
     private String description;
 
+    @NotNull
     @Column(name = "restaurantID")
     private long restaurantID;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private FoodType type;
 
+    @NotNull
     @Column(name = "unitPrice")
     private double unitPrice;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
+    @NotNull
     @Column(name = "createdAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String createdAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp createdAt;
 
+    @NotNull
     @Column(name = "lastModifiedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String lastModifiedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp lastModifiedAt;
 
+    @NotNull
     @Column(name = "deletedAt")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private String deletedAt;
+    @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
+    private Timestamp deletedAt;
 
     public long getId() {
         return id;
@@ -81,11 +102,11 @@ public class Food {
         this.restaurantID = restaurantID;
     }
 
-    public String getType() {
+    public FoodType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(FoodType type) {
         this.type = type;
     }
 
@@ -97,35 +118,35 @@ public class Food {
         this.unitPrice = unitPrice;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getLastModifiedAt() {
+    public Timestamp getLastModifiedAt() {
         return lastModifiedAt;
     }
 
-    public void setLastModifiedAt(String lastModifiedAt) {
+    public void setLastModifiedAt(Timestamp lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 
-    public String getDeletedAt() {
+    public Timestamp getDeletedAt() {
         return deletedAt;
     }
 
-    public void setDeletedAt(String deletedAt) {
+    public void setDeletedAt(Timestamp deletedAt) {
         this.deletedAt = deletedAt;
     }
 
@@ -136,7 +157,7 @@ public class Food {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", restaurantID=" + restaurantID +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", unitPrice=" + unitPrice +
                 ", status='" + status + '\'' +
                 ", createdAt='" + createdAt + '\'' +
