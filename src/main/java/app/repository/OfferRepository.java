@@ -1,11 +1,11 @@
-package repository;
+package app.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import model.User;
+import app.model.Offer;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface OfferRepository extends CrudRepository<Offer, Long> {
 
 }

@@ -1,4 +1,4 @@
-package model;
+package app.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -97,21 +97,38 @@ public class User {
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp createdAt;
 
-    @NotNull
     @Column(name = "lastModifiedAt")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp lastModifiedAt;
 
-    @NotNull
     @Column(name = "deletedAt")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
-
     public User() {
-        this.role = Role.USER;
+
+    }
+
+    public User(String firstName, String lastName, Sex sex, Date dateOfBirth, String username, String password, String email, String mobile, String street, String city, String state, String zipCode, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.mobile = mobile;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.role = role;
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
+//        this.status = status;
+//        this.createdAt = createdAt;
+//        this.lastModifiedAt = lastModifiedAt;
+//        this.deletedAt = deletedAt;
     }
 
     public long getId() {

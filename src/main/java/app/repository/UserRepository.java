@@ -1,11 +1,11 @@
-package repository;
+package app.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import model.Restaurant;
+import app.model.User;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RestaurantRepository extends CrudRepository<Restaurant, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
 }

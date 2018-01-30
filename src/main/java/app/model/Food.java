@@ -1,4 +1,4 @@
-package model;
+package app.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
