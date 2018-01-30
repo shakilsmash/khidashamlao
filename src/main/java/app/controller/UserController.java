@@ -41,25 +41,6 @@ public class UserController {
         return "Added to the database!";
     }
 
-    @RequestMapping(value = "updateUser")
-    @ResponseBody
-    public String updateUser(@RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam User.Sex sex,
-                             @RequestParam Date dateOfBirth,
-                             @RequestParam String username,
-                             @RequestParam String password,
-                             @RequestParam String email,
-                             @RequestParam String mobile,
-                             @RequestParam String street,
-                             @RequestParam String city,
-                             @RequestParam String state,
-                             @RequestParam String zipCode,
-                             @RequestParam User.Role role) {
-        userService.createUser(firstName, lastName, sex, dateOfBirth, username, password, email, mobile, street, city, state, zipCode, role);
-        return "Added to the database!";
-    }
-
     @RequestMapping(value = "retrieveUser")
     @ResponseBody
     public User retrieveUser(@RequestParam long id) {
@@ -77,10 +58,7 @@ public class UserController {
     public String updateUser(@RequestParam long id,
                              @RequestParam String firstName,
                              @RequestParam String lastName,
-                             @RequestParam User.Sex sex,
                              @RequestParam Date dateOfBirth,
-                             @RequestParam String username,
-                             @RequestParam String password,
                              @RequestParam String email,
                              @RequestParam String mobile,
                              @RequestParam String street,
@@ -91,7 +69,7 @@ public class UserController {
         return "User updated.";
     }
 
-    @RequestMapping(value = "changeUsePassword")
+    @RequestMapping(value = "changeUserPassword")
     @ResponseBody
     public String changeUserPassword(@RequestParam long id,
                                      @RequestParam String password) {
@@ -115,7 +93,7 @@ public class UserController {
         return "User status changed.";
     }
 
-    @RequestMapping(value = "changeRole")
+    @RequestMapping(value = "deleteUser")
     @ResponseBody
     public String deleteUser(@RequestParam long id) {
         userService.deleteUser(id);
