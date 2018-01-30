@@ -41,7 +41,7 @@ public class UserService {
         updateModificationDate(id);
     }
 
-    public void updateUserPassword(long id, String password) {
+    public void changeUserPassword(long id, String password) {
         userRepository.findOne(id).setPassword(password);
         updateModificationDate(id);
     }
@@ -61,7 +61,7 @@ public class UserService {
         userRepository.findOne(id).setDeletedAt(new Timestamp(new Date().getTime()));
     }
 
-    public void updateModificationDate(long id) {
+    private void updateModificationDate(long id) {
         userRepository.findOne(id).setLastModifiedAt(new Timestamp(new Date().getTime()));
     }
 }
