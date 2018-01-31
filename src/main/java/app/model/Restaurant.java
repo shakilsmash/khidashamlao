@@ -15,13 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "restaurant")
 public class Restaurant {
 
-    public enum Cuisine { BENGALI, BAKERY, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
-    public enum Environment { LOUNGE, FAMILY, PARTY, KARAOKE, STALL}
+    public enum Cuisine { UNDEFINED, BENGALI, BAKERY, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
+    public enum Environment { UNDEFINED, LOUNGE, FAMILY, PARTY, KARAOKE, STALL}
 
     @Id
     @NotNull
@@ -108,6 +109,46 @@ public class Restaurant {
     @Column(name = "deletedAt")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
+
+    public Restaurant() {
+        this.name = "Default Name";
+        this.description = "Default Description";
+        this.vat = 0.0;
+        this.email = "default@default.com";
+        this.mobile = "0000000";
+        this.street = "Default Street";
+        this.city = "Default City";
+        this.state = "Default State";
+        this.zipCode = "0000";
+        this.openingTime = new Timestamp(new Date().getTime());
+        this.closingTime = new Timestamp(new Date().getTime());
+        this.cuisineSpecialty = Cuisine.UNDEFINED;
+        this.environmentType = Environment.UNDEFINED;
+        this.advancedBooking = false;
+        this.delivery = false;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
+
+    public Restaurant(String name, String description, double vat, String email, String mobile, String street, String city, String state, String zipCode, Timestamp openingTime, Timestamp closingTime, Cuisine cuisineSpecialty, Environment environmentType, boolean advancedBooking, boolean delivery) {
+        this.name = name;
+        this.description = description;
+        this.vat = vat;
+        this.email = email;
+        this.mobile = mobile;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.openingTime = openingTime;
+        this.closingTime = closingTime;
+        this.cuisineSpecialty = cuisineSpecialty;
+        this.environmentType = environmentType;
+        this.advancedBooking = advancedBooking;
+        this.delivery = delivery;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
 
     public long getId() {
         return id;

@@ -103,6 +103,6 @@ public class UserController {
     @RequestMapping(value = "welcome")
     @ResponseBody
     public String welcome() {
-        return "Welcome to KhidaShamlao, Visitor!";
+        return "Welcome to Users, Visitor!";
     }
 }

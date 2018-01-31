@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "offer")
@@ -75,6 +76,30 @@ public class Offer {
     @Column(name = "deletedAt")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
+
+    public Offer() {
+        this.name = "Default name";
+        this.description = "Default description";
+        this.discountPercentage = 0;
+        this.startDate = new Timestamp(new Date().getTime());
+        this.endDate = new Timestamp(new Date().getTime());
+        this.foodID = 9999;
+        this.restaurantID = 9999;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
+
+    public Offer(String name, String description, double discountPercentage, Timestamp startDate, Timestamp endDate, long foodID, long restaurantID) {
+        this.name = name;
+        this.description = description;
+        this.discountPercentage = discountPercentage;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.foodID = foodID;
+        this.restaurantID = restaurantID;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
 
     public long getId() {
         return id;

@@ -15,12 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "food")
 public class Food {
 
-    public enum FoodType { BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE }
+    public enum FoodType { UNDEFINED, BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -69,6 +70,25 @@ public class Food {
     @Column(name = "deletedAt")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
+
+    public Food() {
+        this.name = "Default Name";
+        this.description = "Default Description";
+        this.restaurantID = 9999;
+        this.type = FoodType.UNDEFINED;
+        this.unitPrice = 0;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
+    public Food(String name, String description, long restaurantID, FoodType type, double unitPrice) {
+        this.name = name;
+        this.description = description;
+        this.restaurantID = restaurantID;
+        this.type = type;
+        this.unitPrice = unitPrice;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
+    }
 
     public long getId() {
         return id;

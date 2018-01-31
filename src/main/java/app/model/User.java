@@ -23,7 +23,7 @@ import java.util.Date;
 public class User {
 
     public enum Sex { MALE, FEMALE, OTHER }
-    public enum Role { USER, RESTAURANTADMIN, ADMIN }
+    public enum Role { UNDEFINED, USER, RESTAURANTADMIN, ADMIN }
 
     @Id
     @NotNull
@@ -106,7 +106,21 @@ public class User {
     private Timestamp deletedAt;
 
     public User() {
-
+        this.firstName = "First";
+        this.lastName = "Last";
+        this.sex = Sex.OTHER;
+        this.dateOfBirth = new Date("01/01/1990");
+        this.username = "defaultUser";
+        this.password = "root";
+        this.email = "default@default.com";
+        this.mobile = "0000000";
+        this.street = "Default Street";
+        this.city = "Default City";
+        this.state = "Default State";
+        this.zipCode = "0000";
+        this.role = Role.UNDEFINED;
+        this.status = Status.PENDING;
+        this.createdAt = new Timestamp(new Date().getTime());
     }
 
     public User(String firstName, String lastName, Sex sex, Date dateOfBirth, String username, String password, String email, String mobile, String street, String city, String state, String zipCode, Role role) {
@@ -125,10 +139,6 @@ public class User {
         this.role = role;
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
-//        this.status = status;
-//        this.createdAt = createdAt;
-//        this.lastModifiedAt = lastModifiedAt;
-//        this.deletedAt = deletedAt;
     }
 
     public long getId() {
