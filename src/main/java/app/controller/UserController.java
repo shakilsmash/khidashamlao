@@ -5,10 +5,16 @@ import app.model.User;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
@@ -22,78 +28,33 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "createUser")
+    @PostMapping(value = "createUser")
     @ResponseBody
-    public String createUser(@RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam User.Sex sex,
-                             @RequestParam Date dateOfBirth,
-                             @RequestParam String username,
-                             @RequestParam String password,
-                             @RequestParam String email,
-                             @RequestParam String mobile,
-                             @RequestParam String street,
-                             @RequestParam String city,
-                             @RequestParam String state,
-                             @RequestParam String zipCode,
-                             @RequestParam User.Role role) {
-        userService.createUser(firstName, lastName, sex, dateOfBirth, username, password, email, mobile, street, city, state, zipCode, role);
+    public String createUser(@Valid User user) {
+        userService.saveUser(user);
         return "Added to the database!";
     }
 
-    @RequestMapping(value = "retrieveUser")
+    @GetMapping(value = "retrieveUser/{id}")
     @ResponseBody
-    public User retrieveUser(@RequestParam long id) {
+    public User retrieveUser(@PathVariable long id) {
         return userService.retrieveUser(id);
     }
 
-    @RequestMapping(value = "retrieveAllUsers")
+    @GetMapping(value = "retrieveAllUsers")
     @ResponseBody
     public Iterable<User> retrieveAllUsers() {
         return userService.retrieveAllUsers();
     }
 
-    @RequestMapping(value = "updateUser")
+    @PutMapping(value = "updateUser/{id}")
     @ResponseBody
-    public String updateUser(@RequestParam long id,
-                             @RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam Date dateOfBirth,
-                             @RequestParam String email,
-                             @RequestParam String mobile,
-                             @RequestParam String street,
-                             @RequestParam String city,
-                             @RequestParam String state,
-                             @RequestParam String zipCode) {
-        userService.updateUser(id, firstName, lastName, dateOfBirth, email, mobile, street, city, state, zipCode);
+    public String updateUser(User user) {
+        userService.saveUser(user);
         return "User updated.";
     }
 
-    @RequestMapping(value = "changeUserPassword")
-    @ResponseBody
-    public String changeUserPassword(@RequestParam long id,
-                                     @RequestParam String password) {
-        userService.changeUserPassword(id, password);
-        return "User password changed.";
-    }
-
-    @RequestMapping(value = "changeUserRole")
-    @ResponseBody
-    public String changeUserRole(@RequestParam long id,
-                                 @RequestParam User.Role role) {
-        userService.changeUserRole(id, role);
-        return "User role changed.";
-    }
-
-    @RequestMapping(value = "changeUserStatus")
-    @ResponseBody
-    public String changeUserStatus(@RequestParam long id,
-                                   @RequestParam Status status) {
-        userService.changeUserStatus(id, status);
-        return "User status changed.";
-    }
-
-    @RequestMapping(value = "deleteUser")
+    @DeleteMapping(value = "deleteUser")
     @ResponseBody
     public String deleteUser(@RequestParam long id) {
         userService.deleteUser(id);

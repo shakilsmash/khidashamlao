@@ -21,10 +21,10 @@ import java.util.Date;
 @Table(name = "food")
 public class Food {
 
-    public enum FoodType { UNDEFINED, BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE }
+    public enum FoodType {UNDEFINED, BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE}
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Value("${some.key:0}")
     @Column(name = "id", unique = true)
     private long id;
@@ -80,6 +80,7 @@ public class Food {
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
     }
+
     public Food(String name, String description, long restaurantID, FoodType type, double unitPrice) {
         this.name = name;
         this.description = description;

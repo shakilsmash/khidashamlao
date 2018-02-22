@@ -4,24 +4,23 @@ import app.model.Food;
 import app.model.Status;
 import app.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping(value = "food")
 public class FoodController {
 
-    private FoodService foodService;
+    private final FoodService foodService;
 
     @Autowired
     public FoodController(FoodService foodService) {
         this.foodService = foodService;
     }
 
-    @RequestMapping(value = "createFood")
-    @ResponseBody
+    @GetMapping(value = "createFood")
     public String createFood(@RequestParam String name,
                              @RequestParam String description,
                              @RequestParam long restaurantID,
@@ -30,21 +29,18 @@ public class FoodController {
         foodService.createFood(name, description, restaurantID, type, unitPrice);
         return "Food Created";
     }
-
+    //localhost/users/10
     @RequestMapping(value = "retrieveFood")
-    @ResponseBody
     public Food retrieveFood(@RequestParam long id) {
         return foodService.retrieveFood(id);
     }
 
     @RequestMapping(value = "retrieveAllFood")
-    @ResponseBody
     public Iterable<Food> retrieveAllFood() {
         return foodService.retrieveAllFood();
     }
 
     @RequestMapping(value = "updateFood")
-    @ResponseBody
     public String createFood(@RequestParam long id,
                              @RequestParam String name,
                              @RequestParam String description,
@@ -55,7 +51,6 @@ public class FoodController {
     }
 
     @RequestMapping(value = "changeFoodStatus")
-    @ResponseBody
     public String retrieveFood(@RequestParam long id,
                                @RequestParam Status status) {
         foodService.changeFoodStatus(id, status);
@@ -63,7 +58,6 @@ public class FoodController {
     }
 
     @RequestMapping(value = "deleteFood")
-    @ResponseBody
     public String deleteFood(@RequestParam long id) {
         foodService.deleteFood(id);
         return "Food Deleted";

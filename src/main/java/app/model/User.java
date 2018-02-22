@@ -22,7 +22,7 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
-    public enum Sex { MALE, FEMALE, OTHER }
+    public enum Gender { MALE, FEMALE, OTHER }
     public enum Role { UNDEFINED, USER, RESTAURANTADMIN, ADMIN }
 
     @Id
@@ -34,19 +34,19 @@ public class User {
 
     @NotBlank
     @Length(max = 255)
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
     @NotBlank
     @Length(max = 255)
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sex")
-    private Sex sex;
+    @Column(name = "gender")
+    private Gender gender;
 
-    @Column(name = "dateOfBirth")
+    @Column(name = "date_of_birth")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
 
@@ -93,50 +93,20 @@ public class User {
     private Status status;
 
     @NotNull
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp createdAt;
 
-    @Column(name = "lastModifiedAt")
+    @Column(name = "modified_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
-    private Timestamp lastModifiedAt;
+    private Timestamp modifiedAt;
 
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
     public User() {
-        this.firstName = "First";
-        this.lastName = "Last";
-        this.sex = Sex.OTHER;
-        this.dateOfBirth = new Date("01/01/1990");
-        this.username = "defaultUser";
-        this.password = "root";
-        this.email = "default@default.com";
-        this.mobile = "0000000";
-        this.street = "Default Street";
-        this.city = "Default City";
-        this.state = "Default State";
-        this.zipCode = "0000";
         this.role = Role.UNDEFINED;
-        this.status = Status.PENDING;
-        this.createdAt = new Timestamp(new Date().getTime());
-    }
-
-    public User(String firstName, String lastName, Sex sex, Date dateOfBirth, String username, String password, String email, String mobile, String street, String city, String state, String zipCode, Role role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.sex = sex;
-        this.dateOfBirth = dateOfBirth;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.mobile = mobile;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.role = role;
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
     }
@@ -165,12 +135,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public Date getDateOfBirth() {
@@ -269,12 +239,12 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getLastModifiedAt() {
-        return lastModifiedAt;
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Timestamp getDeletedAt() {
@@ -291,7 +261,7 @@ public class User {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", sex=" + sex +
+                ", gender=" + gender +
                 ", dateOfBirth=" + dateOfBirth +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
@@ -304,7 +274,7 @@ public class User {
                 ", role=" + role +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
-                ", lastModifiedAt=" + lastModifiedAt +
+                ", modifiedAt=" + modifiedAt +
                 ", deletedAt=" + deletedAt +
                 '}';
     }
