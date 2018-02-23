@@ -34,7 +34,12 @@ public class UserService implements UserServiceInterface {
     }
 
     public void deleteUser(long id) {
-        userRepository.delete(id);
+        this.user = retrieveUser(id);
+        user.setStatus(Status.DELETED);
+        user.setDeletedAt(new Timestamp(new Date().getTime()));
     }
 
+    public void deleteUserPermanently(long id) {
+        userRepository.delete(id);
+    }
 }

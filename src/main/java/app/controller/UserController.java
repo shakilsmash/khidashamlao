@@ -30,38 +30,63 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "createUser")
+    @PostMapping(value = "")
     @ResponseBody
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         userService.saveUser(user);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @GetMapping(value = "retrieveUser/{id}")
+    @GetMapping(value = "{id}")
     @ResponseBody
     public User retrieveUser(@PathVariable long id) {
         return userService.retrieveUser(id);
     }
 
-    @GetMapping(value = "retrieveAllUsers")
+    @GetMapping(value = "")
     @ResponseBody
     public Iterable<User> retrieveAllUsers() {
         return userService.retrieveAllUsers();
     }
 
-    @PutMapping(value = "updateUser/")
+    @PutMapping(value = "updateUserPassword/")
     @ResponseBody
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()));
-        user = userMapper.updatePassword(user.getPassword());
+    public ResponseEntity<User> updateUserPassword(@RequestBody User user) {
+        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+        user = userMapper.updatePassword();
         userService.saveUser(user);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "deleteUser")
+    @PutMapping(value = "updateUserInfo/")
     @ResponseBody
-    public String deleteUser(@RequestParam long id) {
+    public ResponseEntity<User> updateUserInfo(@RequestBody User user) {
+        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+        user = userMapper.updateInfo();
+        userService.saveUser(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "updateUserInfoAdmin/")
+    @ResponseBody
+    public ResponseEntity<User> updateUserInfoAdmin(@RequestBody User user) {
+        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+        user = userMapper.updateInfoAdmin();
+        userService.saveUser(user);
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "deleteUser/{id}")
+    @ResponseBody
+    public String deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
+        return "User deleted";
+    }
+
+    @DeleteMapping(value = "{id}")
+    @ResponseBody
+    public String deleteUserPermanently(@PathVariable long id) {
+        userService.deleteUserPermanently(id);
         return "User deleted";
     }
 

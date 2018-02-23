@@ -16,4 +16,6 @@ public interface UserServiceInterface {
 
     void deleteUser(long id);
 
+    void deleteUserPermanently(long id);
+
 }
