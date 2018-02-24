@@ -21,24 +21,43 @@ public class UserService implements UserServiceInterface {
         this.userRepository = userRepository;
     }
 
+    /**
+     * @param user is the id of the object that is to be saved
+     * @return null
+     */
     public void saveUser(User user) {
         userRepository.save(user);
     }
 
+    /**
+     * @param id is the id of the object that is to be returned
+     * @return the user object
+     */
     public User retrieveUser(long id) {
         return userRepository.findOne(id);
     }
 
+    /**
+     * @return all the user objects available on the database
+     */
     public Iterable<User> retrieveAllUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Updates the user status and deletion time but doesn't delete the entity from the database.
+     * @return null
+     */
     public void deleteUser(long id) {
         this.user = retrieveUser(id);
         user.setStatus(Status.DELETED);
         user.setDeletedAt(new Timestamp(new Date().getTime()));
     }
 
+    /**
+     * Deletes the user entity from the database.
+     * @return null
+     */
     public void deleteUserPermanently(long id) {
         userRepository.delete(id);
     }
