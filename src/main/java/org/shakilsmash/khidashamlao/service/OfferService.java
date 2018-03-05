@@ -1,8 +1,8 @@
-package app.service;
+package org.shakilsmash.khidashamlao.service;
 
-import app.model.Offer;
-import app.model.Status;
-import app.repository.OfferRepository;
+import org.shakilsmash.khidashamlao.model.Offer;
+import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

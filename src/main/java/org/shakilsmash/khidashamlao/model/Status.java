@@ -1,4 +1,4 @@
-package app.model;
+package org.shakilsmash.khidashamlao.model;
 
 /**
  * Created by shakilsmash on 1/29/2018.

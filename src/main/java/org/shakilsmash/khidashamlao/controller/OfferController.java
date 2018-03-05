@@ -1,8 +1,8 @@
-package app.controller;
+package org.shakilsmash.khidashamlao.controller;
 
-import app.model.Offer;
-import app.model.Status;
-import app.service.OfferService;
+import org.shakilsmash.khidashamlao.model.Offer;
+import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package app.model;
+package org.shakilsmash.khidashamlao.model;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -22,12 +22,13 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
-    public enum Gender { MALE, FEMALE, OTHER }
-    public enum Role { UNDEFINED, USER, RESTAURANTADMIN, ADMIN }
+    public enum Gender {MALE, FEMALE, OTHER}
+
+    public enum Role {UNDEFINED, USER, RESTAURANTADMIN, ADMIN}
 
     @Id
     @NotNull
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Value("${some.key:0}")
     @Column(name = "id", unique = true)
     private long id;

@@ -1,14 +1,13 @@
-package app.service.serviceInterface;
+package org.shakilsmash.khidashamlao.service;
 
-import app.model.User;
-import app.repository.UserRepository;
+import org.shakilsmash.khidashamlao.model.User;
 
 /**
  * Created by shakilsmash on 2/22/2018.
  */
-public interface UserServiceInterface {
+public interface UserService {
 
-    void saveUser(User user);
+    User save(User user);
 
     User retrieveUser(long id);
 

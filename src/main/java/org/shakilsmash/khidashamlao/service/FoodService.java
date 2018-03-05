@@ -1,8 +1,8 @@
-package app.service;
+package org.shakilsmash.khidashamlao.service;
 
-import app.model.Food;
-import app.model.Status;
-import app.repository.FoodRepository;
+import org.shakilsmash.khidashamlao.model.Food;
+import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,8 @@
-package app.service;
+package org.shakilsmash.khidashamlao.service;
 
-import app.model.Status;
-import app.model.User;
-import app.repository.UserRepository;
-import app.service.serviceInterface.UserServiceInterface;
+import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.model.User;
+import org.shakilsmash.khidashamlao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,22 +10,23 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
-public class UserService implements UserServiceInterface {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private User user;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     /**
+     * Saves a user.
+     *
      * @param user is the id of the object that is to be saved
      * @return null
      */
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     /**
@@ -49,9 +49,10 @@ public class UserService implements UserServiceInterface {
      * @return null
      */
     public void deleteUser(long id) {
-        this.user = retrieveUser(id);
+        User user = userRepository.getOne(id);
         user.setStatus(Status.DELETED);
         user.setDeletedAt(new Timestamp(new Date().getTime()));
+        userRepository.save(user);
     }
 
     /**

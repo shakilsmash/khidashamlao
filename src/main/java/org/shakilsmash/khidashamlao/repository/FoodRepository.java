@@ -1,8 +1,8 @@
-package app.repository;
+package org.shakilsmash.khidashamlao.repository;
 
+import org.shakilsmash.khidashamlao.model.Food;
 import org.springframework.data.repository.CrudRepository;
 
-import app.model.Food;
 import org.springframework.stereotype.Repository;
 
 @Repository

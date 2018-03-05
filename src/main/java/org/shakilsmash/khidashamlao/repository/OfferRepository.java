@@ -1,8 +1,8 @@
-package app.repository;
+package org.shakilsmash.khidashamlao.repository;
 
+import org.shakilsmash.khidashamlao.model.Offer;
 import org.springframework.data.repository.CrudRepository;
 
-import app.model.Offer;
 import org.springframework.stereotype.Repository;
 
 @Repository
