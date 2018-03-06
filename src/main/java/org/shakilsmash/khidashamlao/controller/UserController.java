@@ -64,6 +64,13 @@ public class UserController {
         return userService.retrieveAllUsers();
     }
 
+    @PutMapping(value = "updateUserPassword/{id}/{password}")
+    public ResponseEntity<User> updateUserPassword(@PathVariable long id,
+                                   @PathVariable String password) {
+        userService.updatePassword(id, password);
+        return new ResponseEntity<User>(userService.retrieveUser(id), HttpStatus.OK);
+    }
+
 //    /**
 //     * PUT /user/updateUserPassword : Updates user password.
 //     *

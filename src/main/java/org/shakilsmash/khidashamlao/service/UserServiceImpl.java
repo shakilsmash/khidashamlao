@@ -44,6 +44,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    public void updatePassword(long id, String password) {
+        userRepository.updatePassword(id, password);
+    }
+
     /**
      * Updates the user status and deletion time but doesn't delete the entity from the database.
      * @return null

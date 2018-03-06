@@ -13,6 +13,8 @@ public interface UserService {
 
     Iterable<User> retrieveAllUsers();
 
+    void updatePassword(long id, String password);
+
     void deleteUser(long id);
 
     void deleteUserPermanently(long id);
