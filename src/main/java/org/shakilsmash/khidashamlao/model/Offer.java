@@ -38,23 +38,22 @@ public class Offer {
     private String description;
 
     @NotNull
-    @Column(name = "discountPercentage")
+    @Column(name = "discount_percentage")
     private double discountPercentage;
 
     @NotNull
-    @Column(name = "startDate")
+    @Column(name = "start_date")
     private Timestamp startDate;
 
     @NotNull
-    @Column(name = "endDate")
+    @Column(name = "end_date")
     private Timestamp endDate;
 
-    @NotNull
-    @Column(name = "foodID")
+    @Column(name = "food_id")
     private long foodID;
 
     @NotNull
-    @Column(name = "restaurantID")
+    @Column(name = "restaurant_id")
     private long restaurantID;
 
     @NotNull
@@ -63,40 +62,21 @@ public class Offer {
     private Status status;
 
     @NotNull
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp createdAt;
 
     @NotNull
-    @Column(name = "lastModifiedAt")
+    @Column(name = "modified_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
-    private Timestamp lastModifiedAt;
+    private Timestamp modifiedAt;
 
     @NotNull
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
     public Offer() {
-        this.name = "Default name";
-        this.description = "Default description";
-        this.discountPercentage = 0;
-        this.startDate = new Timestamp(new Date().getTime());
-        this.endDate = new Timestamp(new Date().getTime());
-        this.foodID = 9999;
-        this.restaurantID = 9999;
-        this.status = Status.PENDING;
-        this.createdAt = new Timestamp(new Date().getTime());
-    }
-
-    public Offer(String name, String description, double discountPercentage, Timestamp startDate, Timestamp endDate, long foodID, long restaurantID) {
-        this.name = name;
-        this.description = description;
-        this.discountPercentage = discountPercentage;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.foodID = foodID;
-        this.restaurantID = restaurantID;
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
     }
@@ -181,12 +161,12 @@ public class Offer {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getLastModifiedAt() {
-        return lastModifiedAt;
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Timestamp getDeletedAt() {
@@ -210,7 +190,7 @@ public class Offer {
                 ", restaurantID=" + restaurantID +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
-                ", lastModifiedAt=" + lastModifiedAt +
+                ", modifiedAt=" + modifiedAt +
                 ", deletedAt=" + deletedAt +
                 '}';
     }

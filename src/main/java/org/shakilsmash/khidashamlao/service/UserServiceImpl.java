@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService {
      * @param id is the id of the object that is to be returned
      * @return the user object
      */
-    public User retrieveUser(long id) {
+    public User retrieve(long id) {
         return userRepository.findOne(id);
     }
 
     /**
      * @return all the user objects available on the database
      */
-    public Iterable<User> retrieveAllUsers() {
+    public Iterable<User> retrieveAll() {
         return userRepository.findAll();
     }
 
@@ -52,8 +52,8 @@ public class UserServiceImpl implements UserService {
      * Updates the user status and deletion time but doesn't delete the entity from the database.
      * @return null
      */
-    public void deleteUser(long id) {
-        User user = userRepository.getOne(id);
+    public void delete(long id) {
+        User user = userRepository.findOne(id);
         user.setStatus(Status.DELETED);
         user.setDeletedAt(new Timestamp(new Date().getTime()));
         userRepository.save(user);
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
      * Deletes the user entity from the database.
      * @return null
      */
-    public void deleteUserPermanently(long id) {
+    public void deletePermanently(long id) {
         userRepository.delete(id);
     }
 }

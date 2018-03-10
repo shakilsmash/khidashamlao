@@ -1,17 +1,23 @@
 package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.Offer;
-import org.shakilsmash.khidashamlao.model.Status;
 import org.shakilsmash.khidashamlao.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Timestamp;
+import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping(value = "offer")
 public class OfferController {
 
@@ -22,56 +28,72 @@ public class OfferController {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "createOffer")
-    @ResponseBody
-    public String createUser(@RequestParam String name,
-                             @RequestParam String description,
-                             @RequestParam double discountPercentage,
-                             @RequestParam Timestamp startDate,
-                             @RequestParam Timestamp endDate,
-                             @RequestParam long foodID,
-                             @RequestParam long restaurantID) {
-        offerService.createOffer(name, description, discountPercentage, startDate, endDate, foodID, restaurantID);
-        return "Offer created.";
+    /**
+     * POST /offer : Create a new offer to be inserted into the database
+     *
+     * @param offer is the object that is initiated with the information from the input JSON
+     * @return the ResponseEntity with status 200 (OK) and with offer in the body, or with status 404 (Not Found)
+     */
+    @PostMapping(value = "")
+    public ResponseEntity<Offer> createOffer(@Valid @RequestBody Offer offer) {
+        Offer result = offerService.save(offer);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "retrieveOffer")
-    @ResponseBody
+    /**
+     * GET /offer/:id : Get a offer from the database with the given id
+     *
+     * @param id specifies the id of the object of the offer that is to be shown from the database
+     * @return Returns and displays all the information of the fetched offer in JSON format.
+     */
+    @GetMapping(value = "{id}")
     public Offer retrieveOffer(@RequestParam long id) {
-        return offerService.retrieveOffer(id);
+        return offerService.retrieve(id);
     }
 
-    @RequestMapping(value = "retrieveAllOffers")
-    @ResponseBody
-    public Iterable<Offer> retrieveAllOffers() {
-        return offerService.retrieveAllOffers();
+    /**
+     * GET /offer/ : Get all the offers from the database
+     *
+     * @return Returns and displays all the information of the fetched offers in JSON format.
+     */
+    @GetMapping(value = "")
+    public ResponseEntity<Iterable<Offer>> retrieveOffer() {
+        return new ResponseEntity<>(offerService.retrieveAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "updateOffer")
-    @ResponseBody
-    public String updateOffer(@RequestParam long id,
-                             @RequestParam String name,
-                             @RequestParam String description,
-                             @RequestParam double discountPercentage,
-                             @RequestParam Timestamp startDate,
-                             @RequestParam Timestamp endDate,
-                             @RequestParam long foodID) {
-        offerService.updateOffer(id, name, description, discountPercentage, startDate, endDate, foodID);
-        return "Offer updated.";
+    /**
+     * PUT /offer/:id : Updates offer's basic info.
+     *
+     * @param offer is the object that is initiated with the information from the input JSON
+     * @return the ResponseEntity with status 200 (OK) and with offer in the body, or with status 404 (Not Found)
+     */
+    @PutMapping(value = "{id}")
+    public ResponseEntity<Offer> updateOffer(@Valid @RequestBody Offer offer) {
+        Offer result = offerService.save(offer);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "changeOfferStatus")
-    @ResponseBody
-    public String changeOfferStatus(@RequestParam long id,
-                                    @RequestParam Status status) {
-        offerService.changeStatus(id, status);
-        return "Status changed of the offer";
+    /**
+     * PUT /offer/delete:id : Soft deletes a offer.
+     *
+     * @param id is the id of the object that is to be deleted
+     * @return A success message
+     */
+    @PutMapping(value = "delete/{id}")
+    public String deleteOffer(@PathVariable long id) {
+        offerService.delete(id);
+        return "Offer deleted.";
     }
 
-    @RequestMapping(value = "deleteStatus")
-    @ResponseBody
-    public String deleteOffer(@RequestParam long id) {
-        offerService.deleteOffer(id);
-        return "Offer deleted";
+    /**
+     * DELETE /offer/:id : Hard deletes a offer.
+     *
+     * @param id is the id of the object that is to be deleted
+     * @return A success message
+     */
+    @DeleteMapping(value = "{id}")
+    public String deleteOfferPermanently(@RequestParam long id) {
+        offerService.deletePermanently(id);
+        return "Offer deleted.";
     }
 }

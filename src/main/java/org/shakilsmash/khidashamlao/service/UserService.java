@@ -9,14 +9,14 @@ public interface UserService {
 
     User save(User user);
 
-    User retrieveUser(long id);
+    User retrieve(long id);
 
-    Iterable<User> retrieveAllUsers();
+    Iterable<User> retrieveAll();
 
     void updatePassword(long id, String password);
 
-    void deleteUser(long id);
+    void delete(long id);
 
-    void deleteUserPermanently(long id);
+    void deletePermanently(long id);
 
 }

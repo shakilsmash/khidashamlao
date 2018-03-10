@@ -2,8 +2,8 @@ package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.User;
 import org.shakilsmash.khidashamlao.service.UserService;
-import org.shakilsmash.khidashamlao.viewModel.UserVM;
-import org.shakilsmash.khidashamlao.viewModelUtility.UserVMUtility;
+import org.shakilsmash.khidashamlao.vm.UserVM;
+import org.shakilsmash.khidashamlao.vmutility.UserVMUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 
@@ -37,8 +38,8 @@ public class UserController {
      */
     @PostMapping(value = "")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserVM userVM) {
-        User result = userService.save(UserVMUtility.mapToUser(userVM));
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        User user = userService.save(UserVMUtility.mapToUser(userVM));
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /**
@@ -49,7 +50,7 @@ public class UserController {
      */
     @GetMapping(value = "{id}")
     public ResponseEntity<User>  retrieveUser(@PathVariable long id) {
-        User user = userService.retrieveUser(id);
+        User user = userService.retrieve(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -59,16 +60,21 @@ public class UserController {
      * @return Returns and displays all the information of the fetched users in JSON format.
      */
     @GetMapping(value = "")
-    public /* use ResponseEntity here */Iterable<User> retrieveAllUsers() {
-        //return new ResponseEntity<User>(userService.retrieveAllUsers(), HttpStatus.OK);
-        return userService.retrieveAllUsers();
+    public ResponseEntity<Iterable<User>> retrieveAllUsers() {
+        return new ResponseEntity<>(userService.retrieveAll(), HttpStatus.OK);
     }
 
-    @PutMapping(value = "updateUserPassword/{id}/{password}")
-    public ResponseEntity<User> updateUserPassword(@PathVariable long id,
-                                   @PathVariable String password) {
+    @PutMapping(value = "updateUserPassword/{id}")
+    public ResponseEntity<User> updateUserPassword(@PathVariable long id, WebRequest request) {
+
+        String password = request.getParameter("password");
+
+        User user = userService.retrieve(id);
+        user.setPassword(password);
+        userService.save(user);
+
         userService.updatePassword(id, password);
-        return new ResponseEntity<User>(userService.retrieveUser(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.retrieve(id), HttpStatus.OK);
     }
 
 //    /**
@@ -79,7 +85,7 @@ public class UserController {
 //     */
 //    @PutMapping(value = "updateUserPassword/")
 //    public ResponseEntity<User> updateUserPassword(@RequestBody User user) {
-//        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+//        UserMapper userMapper = new UserMapper(userService.retrieve(user.getId()), user);
 //        user = userMapper.updatePassword();
 //        userService.save(user);
 //        return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -93,7 +99,7 @@ public class UserController {
 //     */
 //    @PutMapping(value = "updateUserInfo")
 //    public ResponseEntity<User> updateUserInfo(@RequestBody User user) {
-//        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+//        UserMapper userMapper = new UserMapper(userService.retrieve(user.getId()), user);
 //        user = userMapper.updateInfo();
 //        userService.save(user);
 //        return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -107,7 +113,7 @@ public class UserController {
 //     */
 //    @PutMapping(value = "updateUserInfoAdmin/")
 //    public ResponseEntity<User> updateUserInfoAdmin(@RequestBody User user) {
-//        UserMapper userMapper = new UserMapper(userService.retrieveUser(user.getId()), user);
+//        UserMapper userMapper = new UserMapper(userService.retrieve(user.getId()), user);
 //        user = userMapper.updateInfoAdmin();
 //        userService.save(user);
 //        return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -119,9 +125,9 @@ public class UserController {
      * @param id is the id of the object that is to be deleted
      * @return A success message
      */
-    @PutMapping(value = "deleteUser/{id}")
+    @PutMapping(value = "delete/{id}")
     public String deleteUser(@PathVariable long id) {
-        userService.deleteUser(id);
+        userService.delete(id);
         return "User deleted";
     }
 
@@ -133,20 +139,8 @@ public class UserController {
      */
     @DeleteMapping(value = "{id}")
     public String deleteUserPermanently(@PathVariable long id) {
-        userService.deleteUserPermanently(id);
+        userService.deletePermanently(id);
         return "User deleted";
-    }
-
-    @PutMapping(value = "testupdate")
-    public ResponseEntity<User> testupdate(@Valid @RequestBody User user) {
-        //log.debug("REST request to update an User : {}", user);
-        if (user.getId() == 0) {
-            // TODO : need to implement a message alert utility which will be sent with the ResponseEntity
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } else {
-            User result = userService.save(user);
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
     }
 
     /**

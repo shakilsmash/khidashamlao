@@ -1,33 +1,22 @@
-package org.shakilsmash.khidashamlao.viewModel;
+package org.shakilsmash.khidashamlao.vm;
+
+import org.shakilsmash.khidashamlao.model.User.Gender;
 
 import java.util.Date;
-import org.shakilsmash.khidashamlao.model.User.Gender;
-import org.shakilsmash.khidashamlao.model.User.Role;
 
 public class UserVM {
 
     private String firstName;
-
     private String lastName;
-
     private Gender gender;
-
     private Date dateOfBirth;
-
     private String username;
-
     private String password;
-
     private String email;
-
     private String mobile;
-
     private String street;
-
     private String city;
-
     private String state;
-
     private String zipCode;
 
 

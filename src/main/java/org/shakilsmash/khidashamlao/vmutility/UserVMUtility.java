@@ -1,7 +1,7 @@
-package org.shakilsmash.khidashamlao.viewModelUtility;
+package org.shakilsmash.khidashamlao.vmutility;
 
 import org.shakilsmash.khidashamlao.model.User;
-import org.shakilsmash.khidashamlao.viewModel.UserVM;
+import org.shakilsmash.khidashamlao.vm.UserVM;
 
 /**
  * Created by shakilsmash on 3/5/2018.

@@ -41,9 +41,11 @@ public class Restaurant {
     @Column(name = "description")
     private String description;
 
-    @NotBlank
     @Column(name = "vat")
     private double vat;
+
+    @Column(name = "service_charge")
+    private double serviceCharge;
 
     @NotBlank
     @Length(max = 255)
@@ -55,6 +57,11 @@ public class Restaurant {
     @Column(name = "mobile", unique = true)
     private String mobile;
 
+    @NotBlank
+    @Length(max = 255)
+    @Column(name = "branch")
+    private String branch;
+
     @Column(name = "street")
     private String street;
 
@@ -64,30 +71,34 @@ public class Restaurant {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "zipCode")
+    @Column(name = "zip_code")
     private String zipCode;
 
     @NotBlank
     @Length(max = 255)
-    @Column(name = "openingTime")
+    @Column(name = "opening_time")
     private Timestamp openingTime;
 
     @NotBlank
     @Length(max = 255)
-    @Column(name = "closingTime")
+    @Column(name = "closing_time")
     private Timestamp closingTime;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "cuisineSpecialty")
+    @Column(name = "cuisine_specialty")
     private Cuisine cuisineSpecialty;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "environmentType")
+    @Column(name = "environment_type")
     private Environment environmentType;
 
-    @Column(name = "advancedBooking")
+    @NotNull
+    @Column(name = "advanced_booking")
     private boolean advancedBooking;
 
+    @NotNull
     @Column(name = "delivery")
     private boolean delivery;
 
@@ -96,56 +107,19 @@ public class Restaurant {
     private Status status;
 
     @NotNull
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp createdAt;
 
-    @NotNull
-    @Column(name = "lastModifiedAt")
+    @Column(name = "modified_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
-    private Timestamp lastModifiedAt;
+    private Timestamp modifiedAt;
 
-    @NotNull
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
     public Restaurant() {
-        this.name = "Default Name";
-        this.description = "Default Description";
-        this.vat = 0.0;
-        this.email = "default@default.com";
-        this.mobile = "0000000";
-        this.street = "Default Street";
-        this.city = "Default City";
-        this.state = "Default State";
-        this.zipCode = "0000";
-        this.openingTime = new Timestamp(new Date().getTime());
-        this.closingTime = new Timestamp(new Date().getTime());
-        this.cuisineSpecialty = Cuisine.UNDEFINED;
-        this.environmentType = Environment.UNDEFINED;
-        this.advancedBooking = false;
-        this.delivery = false;
-        this.status = Status.PENDING;
-        this.createdAt = new Timestamp(new Date().getTime());
-    }
-
-    public Restaurant(String name, String description, double vat, String email, String mobile, String street, String city, String state, String zipCode, Timestamp openingTime, Timestamp closingTime, Cuisine cuisineSpecialty, Environment environmentType, boolean advancedBooking, boolean delivery) {
-        this.name = name;
-        this.description = description;
-        this.vat = vat;
-        this.email = email;
-        this.mobile = mobile;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
-        this.openingTime = openingTime;
-        this.closingTime = closingTime;
-        this.cuisineSpecialty = cuisineSpecialty;
-        this.environmentType = environmentType;
-        this.advancedBooking = advancedBooking;
-        this.delivery = delivery;
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
     }
@@ -200,6 +174,14 @@ public class Restaurant {
 
     public String getStreet() {
         return street;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     public void setStreet(String street) {
@@ -294,12 +276,12 @@ public class Restaurant {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getLastModifiedAt() {
-        return lastModifiedAt;
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Timestamp getDeletedAt() {
@@ -319,6 +301,7 @@ public class Restaurant {
                 ", vat=" + vat +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", branch='" + branch + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
@@ -331,7 +314,7 @@ public class Restaurant {
                 ", delivery=" + delivery +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
-                ", lastModifiedAt=" + lastModifiedAt +
+                ", modifiedAt=" + modifiedAt +
                 ", deletedAt=" + deletedAt +
                 '}';
     }

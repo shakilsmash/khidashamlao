@@ -19,9 +19,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "food")
-public class Food {
+public class Sustenance {
 
+    public enum SustenanceType {FOOD, BEVERAGE}
     public enum FoodType {UNDEFINED, BURGER, PASTA, PIZZA, SETMENU, SHWARMA, KABAB, CURRY, RICE}
+    public enum BeverageType {UNDEFINED, COFFEE, TEA, SOFTDRINK, MOJITO, LASSI, CRUSHER, JUICE}
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,8 +47,16 @@ public class Food {
     private long restaurantID;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type")
-    private FoodType type;
+    @Column(name = "sustenance_type")
+    private SustenanceType sustenanceType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "food_type")
+    private FoodType foodType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "beverage_type")
+    private BeverageType beverageType;
 
     @NotNull
     @Column(name = "unitPrice")
@@ -71,22 +82,7 @@ public class Food {
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
 
-    public Food() {
-        this.name = "Default Name";
-        this.description = "Default Description";
-        this.restaurantID = 9999;
-        this.type = FoodType.UNDEFINED;
-        this.unitPrice = 0;
-        this.status = Status.PENDING;
-        this.createdAt = new Timestamp(new Date().getTime());
-    }
-
-    public Food(String name, String description, long restaurantID, FoodType type, double unitPrice) {
-        this.name = name;
-        this.description = description;
-        this.restaurantID = restaurantID;
-        this.type = type;
-        this.unitPrice = unitPrice;
+    public Sustenance() {
         this.status = Status.PENDING;
         this.createdAt = new Timestamp(new Date().getTime());
     }
@@ -123,12 +119,28 @@ public class Food {
         this.restaurantID = restaurantID;
     }
 
-    public FoodType getType() {
-        return type;
+    public SustenanceType getSustenanceType() {
+        return sustenanceType;
     }
 
-    public void setType(FoodType type) {
-        this.type = type;
+    public void setSustenanceType(SustenanceType sustenanceType) {
+        this.sustenanceType = sustenanceType;
+    }
+
+    public FoodType getFoodType() {
+        return foodType;
+    }
+
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }
+
+    public BeverageType getBeverageType() {
+        return beverageType;
+    }
+
+    public void setBeverageType(BeverageType beverageType) {
+        this.beverageType = beverageType;
     }
 
     public double getUnitPrice() {
@@ -173,12 +185,14 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
+        return "Sustenance{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", restaurantID=" + restaurantID +
-                ", type=" + type +
+                ", sustenanceType=" + sustenanceType +
+                ", foodType=" + foodType +
+                ", beverageType=" + beverageType +
                 ", unitPrice=" + unitPrice +
                 ", status='" + status + '\'' +
                 ", createdAt='" + createdAt + '\'' +
