@@ -63,7 +63,7 @@ public class RestaurantController {
     @GetMapping(value = "")
     public ResponseEntity<Iterable<Restaurant>> retrieveAllRestaurants(Pageable pageable) {
         Page<Restaurant> page = restaurantService.retrieveAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/user");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/restaurant");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
