@@ -2,9 +2,13 @@ package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.User;
 import org.shakilsmash.khidashamlao.service.UserService;
+import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.shakilsmash.khidashamlao.vm.UserVM;
 import org.shakilsmash.khidashamlao.vmutility.UserVMUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "user")
@@ -60,8 +65,11 @@ public class UserController {
      * @return Returns and displays all the information of the fetched users in JSON format.
      */
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<User>> retrieveAllUsers() {
-        return new ResponseEntity<>(userService.retrieveAll(), HttpStatus.OK);
+    public ResponseEntity<List<User>> findAll(Pageable pageable) {
+        //log.debug("REST request to get a page of Users");
+        Page<User> page = userService.retrieveAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/user");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     @PutMapping(value = "updateUserPassword/{id}")

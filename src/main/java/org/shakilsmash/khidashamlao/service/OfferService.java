@@ -1,6 +1,8 @@
 package org.shakilsmash.khidashamlao.service;
 
 import org.shakilsmash.khidashamlao.model.Offer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Created by shakilsmash on 3/10/2018.
@@ -11,7 +13,7 @@ public interface OfferService {
 
     Offer retrieve(long id);
 
-    Iterable<Offer> retrieveAll();
+    Page<Offer> retrieveAll(Pageable pageable);
 
     void delete(long id);
 

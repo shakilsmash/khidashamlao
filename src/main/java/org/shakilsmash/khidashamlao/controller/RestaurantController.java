@@ -2,7 +2,11 @@ package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.Restaurant;
 import org.shakilsmash.khidashamlao.service.RestaurantService;
+import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,8 +61,10 @@ public class RestaurantController {
      * @return Returns and displays all the information of the fetched restaurants in JSON format.
      */
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Restaurant>> retrieveRestaurant() {
-        return new ResponseEntity<>(restaurantService.retrieveAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Restaurant>> retrieveAllRestaurants(Pageable pageable) {
+        Page<Restaurant> page = restaurantService.retrieveAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/user");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

@@ -4,6 +4,8 @@ import org.shakilsmash.khidashamlao.model.Restaurant;
 import org.shakilsmash.khidashamlao.model.Status;
 import org.shakilsmash.khidashamlao.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -41,8 +43,8 @@ public class RestaurantServiceImpl implements RestaurantService{
     /**
      * @return all the restaurant objects available on the database
      */
-    public Iterable<Restaurant> retrieveAll() {
-        return restaurantRepository.findAll();
+    public Page<Restaurant> retrieveAll(Pageable pageable) {
+        return restaurantRepository.findAll(pageable);
     }
 
     /**

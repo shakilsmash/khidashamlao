@@ -4,6 +4,8 @@ import org.shakilsmash.khidashamlao.model.Offer;
 import org.shakilsmash.khidashamlao.model.Status;
 import org.shakilsmash.khidashamlao.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -40,8 +42,8 @@ public class OfferServiceImpl implements OfferService{
     /**
      * @return all the offer objects available on the database
      */
-    public Iterable<Offer> retrieveAll() {
-        return offerRepository.findAll();
+    public Page<Offer> retrieveAll(Pageable pageable) {
+        return offerRepository.findAll(pageable);
     }
 
     /**

@@ -2,7 +2,11 @@ package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.Offer;
 import org.shakilsmash.khidashamlao.service.OfferService;
+import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "offer")
@@ -57,8 +62,10 @@ public class OfferController {
      * @return Returns and displays all the information of the fetched offers in JSON format.
      */
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Offer>> retrieveOffer() {
-        return new ResponseEntity<>(offerService.retrieveAll(), HttpStatus.OK);
+    public ResponseEntity<List<Offer>> retrieveAllOffers(Pageable pageable) {
+        Page<Offer> page = offerService.retrieveAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/offer");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

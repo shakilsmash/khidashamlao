@@ -4,6 +4,8 @@ import org.shakilsmash.khidashamlao.model.Status;
 import org.shakilsmash.khidashamlao.model.User;
 import org.shakilsmash.khidashamlao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -40,8 +42,8 @@ public class UserServiceImpl implements UserService {
     /**
      * @return all the user objects available on the database
      */
-    public Iterable<User> retrieveAll() {
-        return userRepository.findAll();
+    public Page<User> retrieveAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     public void updatePassword(long id, String password) {

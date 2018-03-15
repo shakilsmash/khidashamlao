@@ -2,7 +2,11 @@ package org.shakilsmash.khidashamlao.controller;
 
 import org.shakilsmash.khidashamlao.model.Sustenance;
 import org.shakilsmash.khidashamlao.service.SustenanceService;
+import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "sustenance")
@@ -57,8 +62,10 @@ public class SustenanceController {
      * @return Returns and displays all the information of the fetched sustenances in JSON format.
      */
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Sustenance>> retrieveSustenance() {
-        return new ResponseEntity<>(sustenanceService.retrieveAll(), HttpStatus.OK);
+    public ResponseEntity<List<Sustenance>> retrieveAllSustenances(Pageable pageable) {
+        Page<Sustenance> page = sustenanceService.retrieveAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "localhost:8080/sustenance");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
      /**

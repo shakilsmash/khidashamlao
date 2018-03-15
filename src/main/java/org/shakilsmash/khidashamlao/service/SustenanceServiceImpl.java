@@ -4,6 +4,8 @@ import org.shakilsmash.khidashamlao.model.Sustenance;
 import org.shakilsmash.khidashamlao.model.Status;
 import org.shakilsmash.khidashamlao.repository.SustenanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -39,8 +41,8 @@ public class SustenanceServiceImpl implements SustenanceService {
     /**
      * @return all the sustenance objects available on the database
      */
-    public Iterable<Sustenance> retrieveAll() {
-        return sustenanceRepository.findAll();
+    public Page<Sustenance> retrieveAll(Pageable pageable) {
+        return sustenanceRepository.findAll(pageable);
     }
 
     /**

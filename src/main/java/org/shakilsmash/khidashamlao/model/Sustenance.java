@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "food")
+@Table(name = "sustenance")
 public class Sustenance {
 
     public enum SustenanceType {FOOD, BEVERAGE}
