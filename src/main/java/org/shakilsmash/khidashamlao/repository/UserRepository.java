@@ -1,6 +1,6 @@
 package org.shakilsmash.khidashamlao.repository;
 
-import org.shakilsmash.khidashamlao.model.User;
+import org.shakilsmash.khidashamlao.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

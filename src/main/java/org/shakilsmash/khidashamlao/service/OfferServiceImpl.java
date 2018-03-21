@@ -1,7 +1,7 @@
 package org.shakilsmash.khidashamlao.service;
 
-import org.shakilsmash.khidashamlao.model.Offer;
-import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.domain.Offer;
+import org.shakilsmash.khidashamlao.domain.Status;
 import org.shakilsmash.khidashamlao.repository.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,34 +21,30 @@ public class OfferServiceImpl implements OfferService{
         this.offerRepository = offerRepository;
     }
 
+
     /**
-     * Saves a offer.
-     *
-     * @param offer is the id of the object that is to be saved
-     * @return null
+     * @inheritDoc
      */
     public Offer save(Offer offer) {
         return offerRepository.save(offer);
     }
 
     /**
-     * @param id is the id of the object that is to be returned
-     * @return the offer object
+     * @inheritDoc
      */
     public Offer retrieve(long id) {
         return offerRepository.findOne(id);
     }
 
     /**
-     * @return all the offer objects available on the database
+     * @inheritDoc
      */
     public Page<Offer> retrieveAll(Pageable pageable) {
         return offerRepository.findAll(pageable);
     }
 
     /**
-     * Updates the offer status and deletion time but doesn't delete the entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void delete(long id) {
         Offer offer = offerRepository.findOne(id);
@@ -58,8 +54,7 @@ public class OfferServiceImpl implements OfferService{
     }
 
     /**
-     * Deletes the offer entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void deletePermanently(long id) {
         offerRepository.delete(id);

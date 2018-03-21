@@ -1,6 +1,6 @@
-package org.shakilsmash.khidashamlao.controller;
+package org.shakilsmash.khidashamlao.web.controller;
 
-import org.shakilsmash.khidashamlao.model.Restaurant;
+import org.shakilsmash.khidashamlao.domain.Restaurant;
 import org.shakilsmash.khidashamlao.service.RestaurantService;
 import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;

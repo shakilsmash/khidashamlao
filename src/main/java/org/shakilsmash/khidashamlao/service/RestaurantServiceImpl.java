@@ -1,7 +1,7 @@
 package org.shakilsmash.khidashamlao.service;
 
-import org.shakilsmash.khidashamlao.model.Restaurant;
-import org.shakilsmash.khidashamlao.model.Status;
+import org.shakilsmash.khidashamlao.domain.Restaurant;
+import org.shakilsmash.khidashamlao.domain.Status;
 import org.shakilsmash.khidashamlao.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,33 +23,28 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     /**
-     * Saves a restaurant.
-     *
-     * @param restaurant is the id of the object that is to be saved
-     * @return null
+     * @inheritDoc
      */
     public Restaurant save(Restaurant restaurant) {
         return restaurantRepository.save(restaurant);
     }
 
     /**
-     * @param id is the id of the object that is to be returned
-     * @return the restaurant object
+     * @inheritDoc
      */
     public Restaurant retrieve(long id) {
         return restaurantRepository.findOne(id);
     }
 
     /**
-     * @return all the restaurant objects available on the database
+     * @inheritDoc
      */
     public Page<Restaurant> retrieveAll(Pageable pageable) {
         return restaurantRepository.findAll(pageable);
     }
 
     /**
-     * Updates the restaurant status and deletion time but doesn't delete the entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void delete(long id) {
         Restaurant restaurant = restaurantRepository.findOne(id);
@@ -59,8 +54,7 @@ public class RestaurantServiceImpl implements RestaurantService{
     }
 
     /**
-     * Deletes the restaurant entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void deletePermanently(long id) {
         restaurantRepository.delete(id);

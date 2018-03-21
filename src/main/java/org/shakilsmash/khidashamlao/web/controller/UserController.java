@@ -1,6 +1,6 @@
-package org.shakilsmash.khidashamlao.controller;
+package org.shakilsmash.khidashamlao.web.controller;
 
-import org.shakilsmash.khidashamlao.model.User;
+import org.shakilsmash.khidashamlao.domain.User;
 import org.shakilsmash.khidashamlao.service.UserService;
 import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.shakilsmash.khidashamlao.vm.UserVM;

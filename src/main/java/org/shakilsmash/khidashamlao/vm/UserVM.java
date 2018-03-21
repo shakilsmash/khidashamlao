@@ -1,6 +1,6 @@
 package org.shakilsmash.khidashamlao.vm;
 
-import org.shakilsmash.khidashamlao.model.User.Gender;
+import org.shakilsmash.khidashamlao.domain.User.Gender;
 
 import java.util.Date;
 

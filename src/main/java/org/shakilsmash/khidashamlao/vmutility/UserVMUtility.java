@@ -1,6 +1,6 @@
 package org.shakilsmash.khidashamlao.vmutility;
 
-import org.shakilsmash.khidashamlao.model.User;
+import org.shakilsmash.khidashamlao.domain.User;
 import org.shakilsmash.khidashamlao.vm.UserVM;
 
 /**

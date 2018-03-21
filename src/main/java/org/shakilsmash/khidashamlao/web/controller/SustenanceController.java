@@ -1,6 +1,6 @@
-package org.shakilsmash.khidashamlao.controller;
+package org.shakilsmash.khidashamlao.web.controller;
 
-import org.shakilsmash.khidashamlao.model.Sustenance;
+import org.shakilsmash.khidashamlao.domain.Sustenance;
 import org.shakilsmash.khidashamlao.service.SustenanceService;
 import org.shakilsmash.khidashamlao.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;

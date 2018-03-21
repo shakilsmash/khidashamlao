@@ -1,4 +1,4 @@
-package org.shakilsmash.khidashamlao.model;
+package org.shakilsmash.khidashamlao.domain;
 
 /**
  * Created by shakilsmash on 1/29/2018.

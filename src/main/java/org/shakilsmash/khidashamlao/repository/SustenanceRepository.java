@@ -1,6 +1,6 @@
 package org.shakilsmash.khidashamlao.repository;
 
-import org.shakilsmash.khidashamlao.model.Sustenance;
+import org.shakilsmash.khidashamlao.domain.Sustenance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;

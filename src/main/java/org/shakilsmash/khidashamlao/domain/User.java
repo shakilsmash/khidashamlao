@@ -1,4 +1,4 @@
-package org.shakilsmash.khidashamlao.model;
+package org.shakilsmash.khidashamlao.domain;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;

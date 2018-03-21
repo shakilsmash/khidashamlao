@@ -1,7 +1,7 @@
 package org.shakilsmash.khidashamlao.service;
 
-import org.shakilsmash.khidashamlao.model.Status;
-import org.shakilsmash.khidashamlao.model.User;
+import org.shakilsmash.khidashamlao.domain.Status;
+import org.shakilsmash.khidashamlao.domain.User;
 import org.shakilsmash.khidashamlao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,37 +22,35 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Saves a user.
-     *
-     * @param user is the id of the object that is to be saved
-     * @return null
+     * @inheritDoc
      */
     public User save(User user) {
         return userRepository.save(user);
     }
 
     /**
-     * @param id is the id of the object that is to be returned
-     * @return the user object
+     * @inheritDoc
      */
     public User retrieve(long id) {
         return userRepository.findOne(id);
     }
 
     /**
-     * @return all the user objects available on the database
+     * @inheritDoc
      */
     public Page<User> retrieveAll(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
+    /**
+     * @inheritDoc
+     */
     public void updatePassword(long id, String password) {
         userRepository.updatePassword(id, password);
     }
 
     /**
-     * Updates the user status and deletion time but doesn't delete the entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void delete(long id) {
         User user = userRepository.findOne(id);
@@ -62,8 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * Deletes the user entity from the database.
-     * @return null
+     * @inheritDoc
      */
     public void deletePermanently(long id) {
         userRepository.delete(id);
