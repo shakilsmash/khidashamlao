@@ -21,6 +21,8 @@ import java.util.Date;
 @Table(name = "offer")
 public class Offer {
 
+    public enum Discount {PERCENTAGE, AMOUNT, PRICE}
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Value("${some.key:0}")
@@ -38,8 +40,13 @@ public class Offer {
     private String description;
 
     @NotNull
-    @Column(name = "discount_percentage")
-    private double discountPercentage;
+    @Column(name = "discount")
+    private double discount;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "discount_nature")
+    private Discount discountNature;
 
     @NotNull
     @Column(name = "start_date")
@@ -105,12 +112,20 @@ public class Offer {
         this.description = description;
     }
 
-    public double getDiscountPercentage() {
-        return discountPercentage;
+    public double getDiscount() {
+        return discount;
     }
 
-    public void setDiscountPercentage(double discountPercentage) {
-        this.discountPercentage = discountPercentage;
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public Discount getDiscountNature() {
+        return discountNature;
+    }
+
+    public void setDiscountNature(Discount discountNature) {
+        this.discountNature = discountNature;
     }
 
     public Timestamp getStartDate() {
@@ -183,7 +198,8 @@ public class Offer {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", discountPercentage=" + discountPercentage +
+                ", discounte=" + discount +
+                ", discountNature=" + discountNature +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", foodID=" + foodID +

@@ -1,5 +1,6 @@
 package org.shakilsmash.khidashamlao.domain;
 
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,12 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
-@Table(name = "sustenance")
-public class Sustenance {
-
+@Table(name = "environment")
+public class Environment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Value("${some.key:0}")
@@ -38,41 +37,24 @@ public class Sustenance {
     private String description;
 
     @NotNull
-    @Column(name = "restaurantID")
-    private long restaurantID;
-
-    @NotNull
-    @Column(name = "sustenance_type_id")
-    private long sustenanceTypeID;
-
-    @NotNull
-    @Column(name = "unitPrice")
-    private double unitPrice;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
 
     @NotNull
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp createdAt;
 
     @NotNull
-    @Column(name = "lastModifiedAt")
+    @Column(name = "modified_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
-    private Timestamp lastModifiedAt;
+    private Timestamp modifiedAt;
 
     @NotNull
-    @Column(name = "deletedAt")
+    @Column(name = "deleted_at")
     @DateTimeFormat(pattern = "hh:mm - dd/MM/yyyy")
     private Timestamp deletedAt;
-
-    public Sustenance() {
-        this.status = Status.PENDING;
-        this.createdAt = new Timestamp(new Date().getTime());
-    }
 
     public long getId() {
         return id;
@@ -98,30 +80,6 @@ public class Sustenance {
         this.description = description;
     }
 
-    public long getRestaurantID() {
-        return restaurantID;
-    }
-
-    public void setRestaurantID(long restaurantID) {
-        this.restaurantID = restaurantID;
-    }
-
-    public long getSustenanceTypeID() {
-        return sustenanceTypeID;
-    }
-
-    public void setSustenanceTypeID(long sustenanceTypeID) {
-        this.sustenanceTypeID = sustenanceTypeID;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -138,12 +96,12 @@ public class Sustenance {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getLastModifiedAt() {
-        return lastModifiedAt;
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setLastModifiedAt(Timestamp lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public Timestamp getDeletedAt() {
@@ -156,17 +114,14 @@ public class Sustenance {
 
     @Override
     public String toString() {
-        return "Sustenance{" +
+        return "Cuisine{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", restaurantID=" + restaurantID +
-                ", sustenance_type_id=" + sustenanceTypeID +
-                ", unitPrice=" + unitPrice +
-                ", status='" + status + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", lastModifiedAt='" + lastModifiedAt + '\'' +
-                ", deletedAt='" + deletedAt + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                ", deletedAt=" + deletedAt +
                 '}';
     }
 }

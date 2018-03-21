@@ -21,9 +21,6 @@ import java.util.Date;
 @Table(name = "restaurant")
 public class Restaurant {
 
-    public enum Cuisine { UNDEFINED, BENGALI, BAKERY, INDIAN, THAI, CHINESE, ITALIAN, FASTFOOD, COFFEESHOP, DESSERTSHOP }
-    public enum Environment { UNDEFINED, LOUNGE, FAMILY, PARTY, KARAOKE, STALL}
-
     @Id
     @NotNull
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -85,14 +82,12 @@ public class Restaurant {
     private Timestamp closingTime;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "cuisine_specialty")
-    private Cuisine cuisineSpecialty;
+    @Column(name = "cuisine_id")
+    private long cuisineID;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "environment_type")
-    private Environment environmentType;
+    @Column(name = "environment_id")
+    private long environmentID;
 
     @NotNull
     @Column(name = "advanced_booking")
@@ -228,20 +223,20 @@ public class Restaurant {
         this.closingTime = closingTime;
     }
 
-    public Cuisine getCuisineSpecialty() {
-        return cuisineSpecialty;
+    public long getCuisineSpecialty() {
+        return cuisineID;
     }
 
-    public void setCuisineSpecialty(Cuisine cuisineSpecialty) {
-        this.cuisineSpecialty = cuisineSpecialty;
+    public void setCuisineSpecialty(long cuisineID) {
+        this.cuisineID = cuisineID;
     }
 
-    public Environment getEnvironmentType() {
-        return environmentType;
+    public long getEnvironmentType() {
+        return environmentID;
     }
 
-    public void setEnvironmentType(Environment environmentType) {
-        this.environmentType = environmentType;
+    public void setEnvironmentType(long environmentID) {
+        this.environmentID = environmentID;
     }
 
     public boolean isAdvancedBooking() {
@@ -308,8 +303,8 @@ public class Restaurant {
                 ", zipCode='" + zipCode + '\'' +
                 ", openingTime=" + openingTime +
                 ", closingTime=" + closingTime +
-                ", cuisineSpecialty=" + cuisineSpecialty +
-                ", environmentType=" + environmentType +
+                ", cuisineID=" + cuisineID +
+                ", environmentID=" + environmentID +
                 ", advancedBooking=" + advancedBooking +
                 ", delivery=" + delivery +
                 ", status=" + status +
