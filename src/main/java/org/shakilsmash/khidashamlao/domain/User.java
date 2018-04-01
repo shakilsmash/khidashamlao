@@ -21,7 +21,7 @@ import java.util.Date;
 @Entity
 @Table(name = "user")
 public class User {
-
+	//ekhane ekta break thakbe always
     public enum Gender {MALE, FEMALE, OTHER}
 
     public enum Role {UNDEFINED, USER, RESTAURANTADMIN, ADMIN}
