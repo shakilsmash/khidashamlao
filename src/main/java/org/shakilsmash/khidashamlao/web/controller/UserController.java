@@ -156,7 +156,7 @@ public class UserController {
      *
      * @return A success message
      */
-    @RequestMapping(value = "welcome")
+    @GetMapping(value = "welcome")
     public String welcome() {
         return "Welcome to Users, Visitor!";
     }

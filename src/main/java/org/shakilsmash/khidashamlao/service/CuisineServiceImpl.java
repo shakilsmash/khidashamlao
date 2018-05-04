@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
-public class CuisineServiceImpl {
+public class CuisineServiceImpl implements CuisineService {
 
     private final CuisineRepository cuisineRepository;
 

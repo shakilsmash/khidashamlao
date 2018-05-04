@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Service
-public class EnvironmentServiceImpl {
+public class EnvironmentServiceImpl implements EnvironmentService{
 
     private final EnvironmentRepository environmentRepository;
 
