@@ -30,7 +30,7 @@ public class AccountController {
     public String test(Model model) {
         Stuff stuff = new Stuff();
         model.addAttribute("page", stuff);
-        model.addAttribute("home", "Hello");
+        model.addAttribute("homes", "Hello");
         return TEST_PATH; //index baad diye dite hobe ?
     }
 
