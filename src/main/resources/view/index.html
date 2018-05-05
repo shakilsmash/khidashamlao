@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
   <link rel="shortcut icon" type="image/x-icon" href="../public/img/favicon.ico" />
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css" />
   <title>Welcome | KhidaShamlao</title>
   <style type="text/css">
     #form{
@@ -16,8 +16,8 @@
    	padding:20px;
    }
   </style>
-
-<body style="background-image: url('../public/img/welcomebanner.jpg');">
+</head>
+<body style="background-image: url('../img/welcomebanner.jpg');">
   
   
   <div class="py-5">
@@ -26,16 +26,17 @@
         <div class="col-md-12">
           <form class="w-25 ml-auto" id="form">
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Enter email">
+              <input type="email" class="form-control" placeholder="Enter email" />
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password"> </div>
-              <br>
+              <input type="password" class="form-control" placeholder="Password" /> </div>
+              <br />
               <button type="button" class="btn btn-danger btn-block">Forgot password?</button>
-              <br>
+              <br />
               <button type="submit" class="btn btn-success btn-block">Login</button>
+            <p th:text="HOHOHOHOHOHOHOHOHO"></p>
           </form>
-          <br>
+          <br />
           <form class="w-25 ml-auto">
            <a class="btn btn-primary btn-block" href="client/account/signup.html">Guest Login</a>
            <a class="btn btn-primary btn-block" href="client/account/signup.html">Sign Up</a>
