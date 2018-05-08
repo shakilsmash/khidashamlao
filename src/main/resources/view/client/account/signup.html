@@ -1,180 +1,97 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorator="layout/layout" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css" />
-  <link rel="shortcut icon" type="image/x-icon" href="../../../public/img/favicon.ico" />
-  <title>Sign Up | KhidaShamlao</title>
+    <title>Sign Up | KhidaShamlao</title>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<section id="content" layout:fragment="content">
+<div class="py-1">
     <div class="container">
-      <a class="navbar-brand" href="#">Khida Shamlao</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent"> </div>
-    </div>
-  </nav>
-  <div class="py-1">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3"> </div>
-        <div class="col-md-6">
-          <div class="card text-white p-5 bg-secondary">
-            <div class="card-body">
-              <h1 class="mb-4">Sign up <span><button class="btn btn-secondary" id="toggleForm" value = "user" onclick="formDisplayer()"><h2 id="toggleName">as Restaurant</h2></button></span></h1>
-              <!--User Sign up-->
-              <div id="user_signup">
-                <p id="demo"></p>
-                <form action="https://formspree.io/YOUREMAILHERE">
-                  <div class="form-group">
-                    <input type="input" class="form-control" placeholder="First Name" />
-                    <input type="input" class="form-control" placeholder="Last Name" />
-                    <div class="btn-group">
-                      <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown"> Gender </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Female</a>
-                        <a class="dropdown-item" href="#">Male</a>
-                        <a class="dropdown-item" href="#">Other</a>
-                      </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card text-white p-5 bg-secondary">
+                    <div class="card-body">
+                        <h1 class="mb-4">Sign up <span><button class="btn btn-secondary" id="toggleForm" value="user"
+                                                               onclick="formDisplayer()"><h2 id="toggleName">as Restaurant</h2></button></span>
+                        </h1>
+                        <!--User Sign up-->
+                        <div id="user_signup">
+                            <p id="demo"></p>
+                            <form action="https://formspree.io/YOUREMAILHERE">
+                                <div class="form-group">
+                                    <input type="input" class="form-control" placeholder="First Name"/>
+                                    <input type="input" class="form-control" placeholder="Last Name"/>
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown">
+                                            Gender
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Female</a>
+                                            <a class="dropdown-item" href="#">Male</a>
+                                            <a class="dropdown-item" href="#">Other</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="E-Mail"/>
+                                    <input type="input" class="form-control" placeholder="Mobile"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="input" class="form-control" placeholder="Username"/>
+                                    <input type="password" class="form-control" placeholder="Password"/></div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" placeholder="Date of Birth"/></div>
+                                <button type="submit" class="btn btn-secondary">Login</button>
+                            </form>
+                        </div>
+                        <!--Restaurant Sign up-->
+                        <div id="restaurant_signup" style="display: none;">
+                            <form action="https://formspree.io/YOUREMAILHERE">
+                                <div class="form-group">
+                                    <input type="input" class="form-control" placeholder="Restaurant Name"/>
+                                    <input type="input" class="form-control" placeholder="Branch"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="E-Mail"/>
+                                    <input type="input" class="form-control" placeholder="Mobile"/>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="5" id="comment"
+                                              placeholder="Description"></textarea></div>
+                                <div class="form-group">
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown">
+                                            Cuisine
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Fast Food</a>
+                                            <a class="dropdown-item" href="#">Bangla</a>
+                                            <a class="dropdown-item" href="#">Chinese</a>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown">
+                                            Environment
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Cart</a>
+                                            <a class="dropdown-item" href="#">Bar</a>
+                                            <a class="dropdown-item" href="#">Restaurant</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Login</button>
+                            </form>
+                        </div>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <input type="email" class="form-control" placeholder="E-Mail" />
-                    <input type="input" class="form-control" placeholder="Mobile" />
-                  </div>
-                  <div class="form-group">
-                    <input type="input" class="form-control" placeholder="Username" />
-                    <input type="password" class="form-control" placeholder="Password" /> </div>
-                  <div class="form-group">
-                    <input type="date" class="form-control" placeholder="Date of Birth" /> </div>
-                  <button type="submit" class="btn btn-secondary">Login</button>
-                </form>
-              </div>
-              <!--Restaurant Sign up-->
-              <div id="restaurant_signup" style="display: none;">
-                <form action="https://formspree.io/YOUREMAILHERE">
-                  <div class="form-group">
-                    <input type="input" class="form-control" placeholder="Restaurant Name" />
-                    <input type="input" class="form-control" placeholder="Branch" />
-                  </div>
-                  <div class="form-group">
-                    <input type="email" class="form-control" placeholder="E-Mail" />
-                    <input type="input" class="form-control" placeholder="Mobile" />
-                  </div>
-                  <div class="form-group">
-                    <textarea class="form-control" rows="5" id="comment" placeholder="Description"></textarea> </div>
-                  <div class="form-group">
-                    <div class="btn-group">
-                      <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown"> Cuisine </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Fast Food</a>
-                        <a class="dropdown-item" href="#">Bangla</a>
-                        <a class="dropdown-item" href="#">Chinese</a>
-                      </div>
-                    </div>
-                    <div class="btn-group">
-                      <button class="btn dropdown-toggle btn-secondary" data-toggle="dropdown"> Environment </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Cart</a>
-                        <a class="dropdown-item" href="#">Bar</a>
-                        <a class="dropdown-item" href="#">Restaurant</a>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-secondary">Login</button>
-                </form>
-              </div>
-
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="bg-dark text-white">
-    <div class="container">
-      <div class="row">
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-secondary">Pingendo</h2>
-          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-secondary">Mapsite</h2>
-          <ul class="list-unstyled">
-            <a href="#" class="text-white">Home</a>
-            <br />
-            <a href="#" class="text-white">About us</a>
-            <br />
-            <a href="#" class="text-white">Our services</a>
-            <br />
-            <a href="#" class="text-white">Stories</a>
-          </ul>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4">Contact</h2>
-          <p>
-            <a href="tel:+246 - 542 550 5462" class="text-white">
-              <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
-          </p>
-          <p>
-            <a href="mailto:info@pingendo.com" class="text-white">
-              <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@pingendo.com</a>
-          </p>
-          <p>
-            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
-              <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
-          </p>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-light">Subscribe</h2>
-          <form>
-            <fieldset class="form-group text-white">
-              <label for="exampleInputEmail1">Get our newsletter</label>
-              <input type="email" class="form-control" placeholder="Enter email" /> </fieldset>
-            <button type="submit" class="btn btn-outline-secondary">Submit</button>
-          </form>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-          <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function formDisplayer() {
-        var restaurant = document.getElementById("restaurant_signup");
-        var user = document.getElementById("user_signup");
-        var toggler = document.getElementById("toggleForm");
-
-        if(toggler.value === "restaurant") {
-          restaurant.style.display = "none";
-          document.getElementById("toggleName").innerHTML = 5;
-        }
-
-        if (restaurant.style.display === "none") {
-            restaurant.style.display = "block";
-            user.style.display = "none";
-            document.getElementById("toggleName").innerHTML = "as User";
-        } else {
-            restaurant.style.display = "none";
-            user.style.display = "block";
-            document.getElementById("toggleName").innerHTML = "as Restaurant";
-        }
-    }
-  </script>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</div>
+</section>
 </body>
-
 </html>

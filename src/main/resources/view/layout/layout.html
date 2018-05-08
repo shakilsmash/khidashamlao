@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../public/img/favicon.ico" />
+    <title>Sign Up | KhidaShamlao</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div th:replace="fragment/header :: header"></div>
+        <div layout:fragment="content"></div>
+        <div th:replace="fragment/footer :: footer"></div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script>
+    function formDisplayer() {
+        var restaurant = document.getElementById("restaurant_signup");
+        var user = document.getElementById("user_signup");
+        var toggler = document.getElementById("toggleForm");
+
+        if (toggler.value === "restaurant") {
+            restaurant.style.display = "none";
+            document.getElementById("toggleName").innerHTML = 5;
+        }
+
+        if (restaurant.style.display === "none") {
+            restaurant.style.display = "block";
+            user.style.display = "none";
+            document.getElementById("toggleName").innerHTML = "as User";
+        } else {
+            restaurant.style.display = "none";
+            user.style.display = "block";
+            document.getElementById("toggleName").innerHTML = "as Restaurant";
+        }
+    }
+</script>
+</html>
