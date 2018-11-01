@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
      * @inheritDoc
      */
     public User retrieve(long id) {
-        return userRepository.findOne(id);
+        return userRepository.findById(id).get();
     }
 
     /**
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
      * @inheritDoc
      */
     public void delete(long id) {
-        User user = userRepository.findOne(id);
+        User user = userRepository.findById(id).get();
         user.setStatus(Status.DELETED);
         user.setDeletedAt(new Timestamp(new Date().getTime()));
         userRepository.save(user);
@@ -63,6 +63,6 @@ public class UserServiceImpl implements UserService {
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 }

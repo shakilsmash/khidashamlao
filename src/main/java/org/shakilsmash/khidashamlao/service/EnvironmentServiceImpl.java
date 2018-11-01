@@ -33,7 +33,7 @@ public class EnvironmentServiceImpl implements EnvironmentService{
      * @inheritDoc
      */
     public Environment retrieve(long id) {
-        return environmentRepository.findOne(id);
+        return environmentRepository.findById(id).get();
     }
 
     /**
@@ -47,7 +47,7 @@ public class EnvironmentServiceImpl implements EnvironmentService{
      * @inheritDoc
      */
     public void delete(long id) {
-        Environment environment = environmentRepository.findOne(id);
+        Environment environment = environmentRepository.findById(id).get();
         environment.setStatus(Status.DELETED);
         environment.setDeletedAt(new Timestamp(new Date().getTime()));
         environmentRepository.save(environment);
@@ -57,6 +57,6 @@ public class EnvironmentServiceImpl implements EnvironmentService{
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        environmentRepository.delete(id);
+        environmentRepository.deleteById(id);
     }
 }

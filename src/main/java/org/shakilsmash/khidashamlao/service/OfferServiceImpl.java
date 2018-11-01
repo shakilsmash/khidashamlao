@@ -33,7 +33,7 @@ public class OfferServiceImpl implements OfferService{
      * @inheritDoc
      */
     public Offer retrieve(long id) {
-        return offerRepository.findOne(id);
+        return offerRepository.findById(id).get();
     }
 
     /**
@@ -47,7 +47,7 @@ public class OfferServiceImpl implements OfferService{
      * @inheritDoc
      */
     public void delete(long id) {
-        Offer offer = offerRepository.findOne(id);
+        Offer offer = offerRepository.findById(id).get();
         offer.setStatus(Status.DELETED);
         offer.setDeletedAt(new Timestamp(new Date().getTime()));
         offerRepository.save(offer);
@@ -57,6 +57,6 @@ public class OfferServiceImpl implements OfferService{
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        offerRepository.delete(id);
+        offerRepository.deleteById(id);
     }
 }

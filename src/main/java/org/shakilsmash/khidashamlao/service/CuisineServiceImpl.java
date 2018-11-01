@@ -33,7 +33,7 @@ public class CuisineServiceImpl implements CuisineService {
      * @inheritDoc
      */
     public Cuisine retrieve(long id) {
-        return cuisineRepository.findOne(id);
+        return cuisineRepository.findById(id).get();
     }
 
     /**
@@ -47,7 +47,7 @@ public class CuisineServiceImpl implements CuisineService {
      * @inheritDoc
      */
     public void delete(long id) {
-        Cuisine cuisine = cuisineRepository.findOne(id);
+        Cuisine cuisine = cuisineRepository.findById(id).get();
         cuisine.setStatus(Status.DELETED);
         cuisine.setDeletedAt(new Timestamp(new Date().getTime()));
         cuisineRepository.save(cuisine);
@@ -57,6 +57,6 @@ public class CuisineServiceImpl implements CuisineService {
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        cuisineRepository.delete(id);
+        cuisineRepository.deleteById(id);
     }
 }

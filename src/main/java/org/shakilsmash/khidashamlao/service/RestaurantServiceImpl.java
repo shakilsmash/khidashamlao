@@ -33,7 +33,7 @@ public class RestaurantServiceImpl implements RestaurantService{
      * @inheritDoc
      */
     public Restaurant retrieve(long id) {
-        return restaurantRepository.findOne(id);
+        return restaurantRepository.findById(id).get();
     }
 
     /**
@@ -47,7 +47,7 @@ public class RestaurantServiceImpl implements RestaurantService{
      * @inheritDoc
      */
     public void delete(long id) {
-        Restaurant restaurant = restaurantRepository.findOne(id);
+        Restaurant restaurant = restaurantRepository.findById(id).get();
         restaurant.setStatus(Status.DELETED);
         restaurant.setDeletedAt(new Timestamp(new Date().getTime()));
         restaurantRepository.save(restaurant);
@@ -57,6 +57,6 @@ public class RestaurantServiceImpl implements RestaurantService{
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        restaurantRepository.delete(id);
+        restaurantRepository.deleteById(id);
     }
 }

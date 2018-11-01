@@ -33,7 +33,7 @@ public class SustenanceTypeServiceImpl implements SustenanceTypeService{
      * @inheritDoc
      */
     public SustenanceType retrieve(long id) {
-        return sustenanceTypeRepository.findOne(id);
+        return sustenanceTypeRepository.findById(id).get();
     }
 
     /**
@@ -47,7 +47,7 @@ public class SustenanceTypeServiceImpl implements SustenanceTypeService{
      * @inheritDoc
      */
     public void delete(long id) {
-        SustenanceType sustenanceType = sustenanceTypeRepository.findOne(id);
+        SustenanceType sustenanceType = sustenanceTypeRepository.findById(id).get();
         sustenanceType.setStatus(Status.DELETED);
         sustenanceType.setDeletedAt(new Timestamp(new Date().getTime()));
         sustenanceTypeRepository.save(sustenanceType);
@@ -57,6 +57,6 @@ public class SustenanceTypeServiceImpl implements SustenanceTypeService{
      * @inheritDoc
      */
     public void deletePermanently(long id) {
-        sustenanceTypeRepository.delete(id);
+        sustenanceTypeRepository.deleteById(id);
     }
 }
